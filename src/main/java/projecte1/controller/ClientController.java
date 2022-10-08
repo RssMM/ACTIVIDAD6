@@ -24,16 +24,16 @@ public class ClientController {
 	@GetMapping("clients")
 	public List<Client> getClients(){
 		clients = new ArrayList<>();
-		
-		clients.add(new Client("Joana", "Fernando", 
+		//Añadir clientes:
+		clients.add(new Client("Joana", "Fernandez",
 				LocalDate.of(2000, Month.APRIL, 23)));
-		clients.add(new Client("Juan", "Giemenez", 
+		clients.add(new Client("Juan", "Jimenez",
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Paul", "Teresa", 
+		clients.add(new Client("Paul", "Ferrer",
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("David", "Sánchez", 
+		clients.add(new Client("David", "Sanchez",
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Sara", "Gonozales", 
+		clients.add(new Client("Sara", "Gonzalez",
 				LocalDate.of(2000, Month.MARCH, 22)));
 		clients.add(new Client("Carmen", "Perez", 
 				LocalDate.of(2000, Month.MARCH, 22)));
@@ -41,7 +41,9 @@ public class ClientController {
 				LocalDate.of(2000, Month.MARCH, 22)));
 		clients.add(new Client("Marco", "Garcia", 
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Jose", "Rordriguez", 
+		clients.add(new Client("Jose", "Rodriguez",
+				LocalDate.of(2000, Month.MARCH, 22)));
+		clients.add(new Client("Marco", "laureano",
 				LocalDate.of(2000, Month.MARCH, 22)));
 		return clients;
 	}
