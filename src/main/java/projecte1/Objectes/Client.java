@@ -35,6 +35,4 @@ public class Client {
 		this.dataNaixement = dataNaixement;
 	}
 	
-	
-
 }
