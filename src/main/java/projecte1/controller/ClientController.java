@@ -13,16 +13,16 @@ import projecte1.Objectes.Client;
 
 @RestController
 public class ClientController {
-	
+
 	ArrayList<Client> clients;
-	
+
 	@GetMapping("client/{id}")
-	public Client getClient(@PathVariable(required=false,name="id") int id) {
+	public Client getClient(@PathVariable(required = false, name = "id") int id) {
 		return clients.get(id);
 	}
-	
+
 	@GetMapping("clients")
-	public List<Client> getClients(){
+	public List<Client> getClients() {
 		clients = new ArrayList<>();
 		//Añadir clientes:
 		clients.add(new Client("Joana", "Fernandez",
@@ -35,15 +35,13 @@ public class ClientController {
 				LocalDate.of(2000, Month.MARCH, 22)));
 		clients.add(new Client("Sara", "Gonzalez",
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Carmen", "Perez", 
+		clients.add(new Client("Carmen", "Perez",
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Ellie", "Martin", 
+		clients.add(new Client("Ellie", "Martin",
 				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Marco", "Garcia", 
+		clients.add(new Client("Marco", "Garcia",
 				LocalDate.of(2000, Month.MARCH, 22)));
 		clients.add(new Client("Jose", "Rodriguez",
-				LocalDate.of(2000, Month.MARCH, 22)));
-		clients.add(new Client("Marco", "laureano",
 				LocalDate.of(2000, Month.MARCH, 22)));
 		return clients;
 	}
