@@ -11,72 +11,72 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import projecte1.Objectes.Client;
+import projecte1.Objectes.Alumnos;
 
 
 @RestController
-public class ClientController {
+public class AlumnoController {
 
-	ArrayList<Client> clients;
+	ArrayList<Alumnos> alumnos;
 	
 	public void setClientList() {
-		clients = new ArrayList<>();
-		//Añadir clientes:
-		clients.add(new Client("Joana", "Fernandez","DAM",
+		alumnos = new ArrayList<>();
+		//Añadir alumnos:
+		alumnos.add(new Alumnos("Joana", "Fernandez","DAM",
 				LocalDate.of(2001, Month.APRIL, 11)));
-		clients.add(new Client("Juan", "Jimenez","DAM",
+		alumnos.add(new Alumnos("Juan", "Jimenez","DAM",
 				LocalDate.of(2002, Month.JANUARY, 22)));
-		clients.add(new Client("Paul", "Ferrer","DAM",
+		alumnos.add(new Alumnos("Paul", "Ferrer","DAM",
 				LocalDate.of(1998, Month.DECEMBER, 29)));
-		clients.add(new Client("David", "Sanchez","DAM",
+		alumnos.add(new Alumnos("David", "Sanchez","DAM",
 				LocalDate.of(1999, Month.MARCH, 15)));
-		clients.add(new Client("Sara", "Gonzalez","DAM",
+		alumnos.add(new Alumnos("Sara", "Gonzalez","DAM",
 				LocalDate.of(2000, Month.MARCH, 13)));
-		clients.add(new Client("Carmen", "Perez","DAW",
+		alumnos.add(new Alumnos("Carmen", "Perez","DAW",
 				LocalDate.of(2000, Month.MAY, 26)));
-		clients.add(new Client("Ellie", "Martin","DAW",
+		alumnos.add(new Alumnos("Ellie", "Martin","DAW",
 				LocalDate.of(2002, Month.OCTOBER, 1)));
-		clients.add(new Client("Marco", "Garcia","DAW",
+		alumnos.add(new Alumnos("Marco", "Garcia","DAW",
 				LocalDate.of(2002, Month.AUGUST, 12)));
-		clients.add(new Client("Jose", "Rodriguez","DAW",
+		alumnos.add(new Alumnos("Jose", "Rodriguez","DAW",
 				LocalDate.of(2001, Month.MARCH, 10)));
 		
 	}
-	@GetMapping("api/clients")
-	public List<Client> getClients() {
+	@GetMapping("api/alumnos")
+	public List<Alumnos> getClients() {
 		setClientList();
-		return clients;
+		return alumnos;
 	}
 	
-	@GetMapping("api/clients/{id}")
-	public Client getClient(@PathVariable(required = true, name = "id") int id) {
+	@GetMapping("api/alumnos/{id}")
+	public Alumnos getClient(@PathVariable(required = true, name = "id") int id) {
 		setClientList();
-		return clients.get(id);
+		return alumnos.get(id);
 	}
 	
-	@GetMapping("api/clients/{id}/{sub}")
+	@GetMapping("api/alumnos/{id}/{sub}")
 	public String getClientinfo(@PathVariable(required = true, name = "id") int id,
 			@PathVariable(required = true, name = "sub") String sub) {
 		setClientList();
 		String output = "err";
 		if(sub.equals("name")) {
-			 output = clients.get(id).getNom();
+			 output = alumnos.get(id).getNom();
 		}else if(sub.equals("lastname")) {
-			 output = clients.get(id).getCognoms();
+			 output = alumnos.get(id).getCognoms();
 		}else if(sub.equals("birthday")) {
-			 output = clients.get(id).getDataNaixement().toString();
+			 output = alumnos.get(id).getDataNaixement().toString();
 		}else if(sub.equals("class")) {
-			 output = clients.get(id).getClase();
+			 output = alumnos.get(id).getClase();
 		}
 		
 		return output;
 	}
 	
-	@GetMapping("api/clients/group/{group}")
-	public List<Client> getClassGroup(@PathVariable(required = true, name = "group") String group) {
+	@GetMapping("api/alumnos/group/{group}")
+	public List<Alumnos> getClassGroup(@PathVariable(required = true, name = "group") String group) {
 		setClientList();
-		ArrayList<Client> output = new ArrayList<>();
-		for (Client client : clients) {
+		ArrayList<Alumnos> output = new ArrayList<>();
+		for (Alumnos client : alumnos) {
            if(client.getClase().equalsIgnoreCase(group)) {
             	output.add(client);
            }
@@ -85,11 +85,11 @@ public class ClientController {
 		return output;
 	}
 	
-	@GetMapping("api/clients/search/name")
-	public List<Client> getMatchNames(@RequestParam("match") String ms) {
+	@GetMapping("api/alumnos/search/name")
+	public List<Alumnos> getMatchNames(@RequestParam("match") String ms) {
 		setClientList();
-		ArrayList<Client> output = new ArrayList<>();
-		for (Client client : clients) {
+		ArrayList<Alumnos> output = new ArrayList<>();
+		for (Alumnos client : alumnos) {
            if(client.getNom().toUpperCase().contains(ms.toUpperCase())) {
             	output.add(client);
            }
@@ -97,11 +97,11 @@ public class ClientController {
 	    return output;
 	}
 	
-	@GetMapping("api/clients/search/lastname")
-	public List<Client> getMatchLastNames(@RequestParam("match") String ms) {
+	@GetMapping("api/alumnos/search/lastname")
+	public List<Alumnos> getMatchLastNames(@RequestParam("match") String ms) {
 		setClientList();
-		ArrayList<Client> output = new ArrayList<>();
-		for (Client client : clients) {
+		ArrayList<Alumnos> output = new ArrayList<>();
+		for (Alumnos client : alumnos) {
            if(client.getCognoms().toUpperCase().contains(ms.toUpperCase())) {
             	output.add(client);
            }
@@ -110,12 +110,12 @@ public class ClientController {
 	}
 	
 	
-	@GetMapping("api/clients/search/birthday")
-	public List<Client> getMatchBirthday(@RequestParam("startAt") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start, 
+	@GetMapping("api/alumnos/search/birthday")
+	public List<Alumnos> getMatchBirthday(@RequestParam("startAt") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start, 
 										@RequestParam("endAt")  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
 		setClientList();
-		ArrayList<Client> output = new ArrayList<>();
-		for (Client client : clients) {
+		ArrayList<Alumnos> output = new ArrayList<>();
+		for (Alumnos client : alumnos) {
 			LocalDate ne = client.getDataNaixement();
            if((ne.isAfter(start) && ne.isBefore(end)) || ne.equals(start) || ne.equals(end)) {
             	output.add(client);
