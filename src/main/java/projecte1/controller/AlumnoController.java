@@ -67,8 +67,9 @@ public class AlumnoController {
 			 output = alumnos.get(id).getDataNaixement().toString();
 		}else if(sub.equals("class")) {
 			 output = alumnos.get(id).getClase();
+		}else if(sub.equals("email")) {
+			 output = alumnos.get(id).getEmail();
 		}
-		
 		return output;
 	}
 	
