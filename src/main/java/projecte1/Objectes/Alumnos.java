@@ -3,13 +3,13 @@ package projecte1.Objectes;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Client {
+public class Alumnos {
 	private String nom;
 	private String cognoms;
         private String clase;
 	private LocalDate dataNaixement;
 
-    public Client(String nom, String cognoms, String clase, LocalDate dataNaixement) {
+    public Alumnos(String nom, String cognoms, String clase, LocalDate dataNaixement) {
         this.nom = nom;
         this.cognoms = cognoms;
         this.clase = clase;
@@ -69,7 +69,7 @@ public class Client {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Client other = (Client) obj;
+        final Alumnos other = (Alumnos) obj;
         if (!Objects.equals(this.nom, other.nom)) {
             return false;
         }
