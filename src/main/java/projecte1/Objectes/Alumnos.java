@@ -1,21 +1,36 @@
 package projecte1.Objectes;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.springframework.beans.factory.annotation.Value;
+
+@Entity
 public class Alumnos {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
 	private String nom;
 	private String cognoms;
     private String clase;
-	private LocalDate dataNaixement;
+	private Date dataNaixement;
 	private String email;
 	
+	public Alumnos() {}
+
 	public Alumnos(String nom, String cognoms, String clase, LocalDate dataNaixement) {
 		super();
 		this.nom = nom;
 		this.cognoms = cognoms;
 		this.clase = clase;
-		this.dataNaixement = dataNaixement;
+		this.dataNaixement =  Date.valueOf(dataNaixement);
 		this.email = AssignEmail(nom, cognoms);
 	}
 	
@@ -24,7 +39,7 @@ public class Alumnos {
 		this.nom = nom;
 		this.cognoms = cognoms;
 		this.clase = clase;
-		this.dataNaixement = dataNaixement;
+		this.dataNaixement = Date.valueOf(dataNaixement);
 		this.email = email;
 	}
     public String AssignEmail(String nombre, String apellido){
@@ -57,12 +72,12 @@ public class Alumnos {
 		this.clase = clase;
 	}
 
-	public LocalDate getDataNaixement() {
+	public Date getDataNaixement() {
 		return dataNaixement;
 	}
 
 	public void setDataNaixement(LocalDate dataNaixement) {
-		this.dataNaixement = dataNaixement;
+		this.dataNaixement = Date.valueOf(dataNaixement);
 	}
 
 	public String getEmail() {
@@ -91,8 +106,5 @@ public class Alumnos {
 				&& Objects.equals(dataNaixement, other.dataNaixement) && Objects.equals(email, other.email)
 				&& Objects.equals(nom, other.nom);
 	}
-	
-	
-    
 	
 }

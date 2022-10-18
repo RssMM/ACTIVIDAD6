@@ -5,43 +5,35 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import project1.repo.AlumnosRepo;
 import projecte1.Objectes.Alumnos;
 
 
 @RestController
 public class AlumnoController {
-
+	@Autowired     
+	AlumnosRepo clientRep; 
+	
 	ArrayList<Alumnos> alumnos;
 	
 	public void setClientList() {
 		alumnos = new ArrayList<>();
-		//Añadir alumnos:
-		alumnos.add(new Alumnos("Joana", "Fernandez","DAM",
-				LocalDate.of(2001, Month.APRIL, 11)));
-		alumnos.add(new Alumnos("Juan", "Jimenez","DAM",
-				LocalDate.of(2002, Month.JANUARY, 22)));
-		alumnos.add(new Alumnos("Paul", "Ferrer","DAM",
-				LocalDate.of(1998, Month.DECEMBER, 29)));
-		alumnos.add(new Alumnos("David", "Sanchez","DAM",
-				LocalDate.of(1999, Month.MARCH, 15)));
-		alumnos.add(new Alumnos("Sara", "Gonzalez","DAM",
-				LocalDate.of(2000, Month.MARCH, 13)));
-		alumnos.add(new Alumnos("Carmen", "Perez","DAW",
-				LocalDate.of(2000, Month.MAY, 26)));
-		alumnos.add(new Alumnos("Ellie", "Martin","DAW",
-				LocalDate.of(2002, Month.OCTOBER, 1)));
-		alumnos.add(new Alumnos("Marco", "Garcia","DAW",
-				LocalDate.of(2002, Month.AUGUST, 12)));
-		alumnos.add(new Alumnos("Jose", "Rodriguez","DAW",
-				LocalDate.of(2001, Month.MARCH, 10)));
+		alumnos = (ArrayList<Alumnos>) clientRep.findAll();
+				
+		
+
+		
 		
 	}
+	
+	
 	@GetMapping("api/alumnos")
 	public List<Alumnos> getClients() {
 		setClientList();
@@ -117,7 +109,7 @@ public class AlumnoController {
 		setClientList();
 		ArrayList<Alumnos> output = new ArrayList<>();
 		for (Alumnos client : alumnos) {
-			LocalDate ne = client.getDataNaixement();
+			LocalDate ne = client.getDataNaixement().toLocalDate();
            if((ne.isAfter(start) && ne.isBefore(end)) || ne.equals(start) || ne.equals(end)) {
             	output.add(client);
            }
