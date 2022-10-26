@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.springframework.beans.factory.annotation.Value;
-
 @Entity
 public class Alumnos {
 	@Id
@@ -19,35 +17,35 @@ public class Alumnos {
 	
 	private String nom;
 	private String cognoms;
-    private String clase;
+    private String grup;
 	private Date dataNaixement;
 	private String email;
 	
+	
+	
 	public Alumnos() {}
 
-	public Alumnos(String nom, String cognoms, String clase, LocalDate dataNaixement) {
-		super();
+	/*public Alumnos(String nom, String cognoms, String clase, LocalDate dataNaixement) {
 		this.nom = nom;
 		this.cognoms = cognoms;
 		this.clase = clase;
 		this.dataNaixement =  Date.valueOf(dataNaixement);
 		this.email = AssignEmail(nom, cognoms);
-	}
+	}*/
 	
-    public Alumnos(String nom, String cognoms, String clase, LocalDate dataNaixement, String email) {
-		super();
+    public Alumnos(String nom, String cognoms, String grup, LocalDate dataNaixement, String email) {
 		this.nom = nom;
 		this.cognoms = cognoms;
-		this.clase = clase;
+		this.grup = grup;
 		this.dataNaixement = Date.valueOf(dataNaixement);
 		this.email = email;
 	}
-    public String AssignEmail(String nombre, String apellido){
+    /*public String AssignEmail(String nombre, String apellido){
 		String SName = (nombre.length() < apellido.length()) ? nombre.toLowerCase() : apellido.toLowerCase();
 		String LName = (nombre.length() < apellido.length()) ? apellido.toLowerCase() : nombre.toLowerCase();
 		String Email = LName.toCharArray()[0] + SName + "@jaumebalmes.net";
 		return Email;
-    }
+    }*/
 	public String getNom() {
 		return nom;
 	}
@@ -64,12 +62,12 @@ public class Alumnos {
 		this.cognoms = cognoms;
 	}
 
-	public String getClase() {
-		return clase;
+	public String getGrup() {
+		return grup;
 	}
 
-	public void setClase(String clase) {
-		this.clase = clase;
+	public void setGrup(String grup) {
+		this.grup = grup;
 	}
 
 	public Date getDataNaixement() {
@@ -90,7 +88,7 @@ public class Alumnos {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(clase, cognoms, dataNaixement, email, nom);
+		return Objects.hash(cognoms, grup, dataNaixement, email, nom);
 	}
 
 	@Override
@@ -102,9 +100,11 @@ public class Alumnos {
 		if (getClass() != obj.getClass())
 			return false;
 		Alumnos other = (Alumnos) obj;
-		return Objects.equals(clase, other.clase) && Objects.equals(cognoms, other.cognoms)
+		return Objects.equals(cognoms, other.cognoms) && Objects.equals(grup, other.grup)
 				&& Objects.equals(dataNaixement, other.dataNaixement) && Objects.equals(email, other.email)
 				&& Objects.equals(nom, other.nom);
 	}
+
+	
 	
 }

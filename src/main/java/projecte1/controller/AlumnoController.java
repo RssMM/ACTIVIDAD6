@@ -1,12 +1,14 @@
 package projecte1.controller;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,20 +20,19 @@ import projecte1.Objectes.Alumnos;
 
 @RestController
 public class AlumnoController {
+	ArrayList<Alumnos> alumnos;
+	
 	@Autowired     
 	AlumnosRepo clientRep; 
 	
-	ArrayList<Alumnos> alumnos;
 	
 	public void setClientList() {
-		alumnos = new ArrayList<>();
+		
 		alumnos = (ArrayList<Alumnos>) clientRep.findAll();
-				
-		
 
-		
-		
 	}
+	
+	
 	
 	
 	@GetMapping("api/alumnos")
@@ -49,6 +50,7 @@ public class AlumnoController {
 	@GetMapping("api/alumnos/{id}/{sub}")
 	public String getClientinfo(@PathVariable(required = true, name = "id") int id,
 			@PathVariable(required = true, name = "sub") String sub) {
+		
 		setClientList();
 		String output = "err";
 		if(sub.equals("name")) {
@@ -57,10 +59,10 @@ public class AlumnoController {
 			 output = alumnos.get(id).getCognoms();
 		}else if(sub.equals("birthday")) {
 			 output = alumnos.get(id).getDataNaixement().toString();
-		}else if(sub.equals("class")) {
-			 output = alumnos.get(id).getClase();
 		}else if(sub.equals("email")) {
 			 output = alumnos.get(id).getEmail();
+		}else if(sub.equals("grup")) {
+			output = alumnos.get(id).getGrup();
 		}
 		return output;
 	}
@@ -70,7 +72,7 @@ public class AlumnoController {
 		setClientList();
 		ArrayList<Alumnos> output = new ArrayList<>();
 		for (Alumnos client : alumnos) {
-           if(client.getClase().equalsIgnoreCase(group)) {
+           if(client.getGrup().equalsIgnoreCase(group)) {
             	output.add(client);
            }
         }
@@ -116,5 +118,15 @@ public class AlumnoController {
         }
 	    return output;
 	}
+	@GetMapping("api/alumnos/{id}/delete")
+    public ResponseEntity<Integer> delete(@PathVariable int id) {
+
+        if (clientRep.existsById((long) id)) {
+        	clientRep.deleteById((long) id);
+        	return new ResponseEntity<>(id, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       
+    }
 	
 }
