@@ -1,16 +1,23 @@
 package projecte1.controller;
 
+import java.beans.FeatureDescriptor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
-
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -118,9 +125,8 @@ public class AlumnoController {
         }
 	    return output;
 	}
-	@GetMapping("api/alumnos/{id}/delete")
-    public ResponseEntity<Integer> delete(@PathVariable int id) {
-
+	@DeleteMapping("api/alumnos/{id}/delete")
+    public ResponseEntity<Integer> deleteAlumno(@PathVariable int id) {
         if (clientRep.existsById((long) id)) {
         	clientRep.deleteById((long) id);
         	return new ResponseEntity<>(id, HttpStatus.OK);
@@ -128,5 +134,20 @@ public class AlumnoController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
        
     }
+	
+	@PostMapping("api/alumnos/{id}/modify")
+    public ResponseEntity<Alumnos> putModify(@PathVariable int id, @RequestBody Alumnos details)  {
+		final BeanWrapper wrap = new BeanWrapperImpl(details);
+		String[] ignoredProperties = Stream.of(wrap.getPropertyDescriptors())
+                .map(FeatureDescriptor::getName)
+                .filter(propertyName -> wrap.getPropertyValue(propertyName) == null)
+                .toArray(String[]::new);
+		
+		Alumnos updateAlumnos = clientRep.findById((long) id).orElseThrow();	
+		BeanUtils.copyProperties(details, updateAlumnos, ignoredProperties);
+		clientRep.save(updateAlumnos);
+		return ResponseEntity.ok(updateAlumnos);
+    }
+	
 	
 }
