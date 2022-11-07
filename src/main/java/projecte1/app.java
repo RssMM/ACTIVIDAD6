@@ -4,11 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import project1.repo.AlumnosRepo;
-import project1.repo.CursosRepo;
+import project1.Repositories.CursoMaterialRepo;
+
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackageClasses = {AlumnosRepo.class, CursosRepo.class})
+@EnableJpaRepositories(basePackageClasses = {CursoMaterialRepo.class})
 public class app {
 
 	public static void main(String[] args) {

@@ -4,9 +4,10 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import projecte1.Objectes.Course;
+import projecte1.Objectes.Students;
 @Repository
-public interface CursosRepo extends CrudRepository<Course, Long>{
+public interface StudentsRepo extends CrudRepository<Students, Long>{
 	
-	public List<Course> findAll();
+	public List<Students> findAll();
+	
 }
