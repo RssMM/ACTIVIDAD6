@@ -8,30 +8,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import project1.Repositories.CursosRepo;
+import project1.Repositories.StudentsRepo;
 import projecte1.Objectes.Course;
+import projecte1.Objectes.Students;
 
 
 
 @RestController
-public class CourseController {
-ArrayList<Course> cursos;
+public class StudentsController {
+	ArrayList<Students> students;
 	
 	@Autowired    
-	CursosRepo cursoRep; 
+	StudentsRepo studentsRep; 
 	
 	public void setCursoList() {
-		cursos = (ArrayList<Course>) cursoRep.findAll();
+		students = (ArrayList<Students>) studentsRep.findAll();
 		
 	}
 	
-	@GetMapping("api/cursos")
-	public List<Course> getCursos() {
+	@GetMapping("api/students")
+	public List<Students> getCursos() {
 		setCursoList();
-		return cursos;
+		return students;
 	}
-	@GetMapping("api/cursos/{id}")
-	public Course getClient(@PathVariable(required = true, name = "id") int id) {
+	@GetMapping("api/students/{id}")
+	public Students getClient(@PathVariable(required = true, name = "id") int id) {
 		setCursoList();
-		return cursos.get(id);
+		return students.get(id);
 	}
 }
