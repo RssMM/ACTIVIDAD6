@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -17,8 +19,8 @@ public class CourseMaterial {
 	
 	private String url;
 	
-	
-	@OneToOne
+	@JsonIgnore
+	@ManyToOne
 	private Course course;
 
 	public CourseMaterial() {}

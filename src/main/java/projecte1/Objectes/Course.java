@@ -1,9 +1,12 @@
 package projecte1.Objectes;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,9 +20,8 @@ public class Course {
 	
 	private String title;
 	
-	@JsonIgnore
-	@OneToOne(mappedBy = "course")
-	private CourseMaterial courseMaterial;
+	@OneToMany(mappedBy = "course")
+	private List<CourseMaterial> courseMaterial;
 	
 	public Course() {
 		
@@ -39,11 +41,11 @@ public class Course {
 		this.title = title;
 	}
 
-	public CourseMaterial getCourseMaterial() {
+	public List<CourseMaterial> getCourseMaterial() {
 		return courseMaterial;
 	}
 
-	public void setCourseMaterial(CourseMaterial courseMaterial) {
+	public void setCourseMaterial(List<CourseMaterial> courseMaterial) {
 		this.courseMaterial = courseMaterial;
 	}
 	

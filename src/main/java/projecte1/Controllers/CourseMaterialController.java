@@ -15,7 +15,7 @@ import projecte1.Objectes.CourseMaterial;
 
 @RestController
 public class CourseMaterialController {
-ArrayList<CourseMaterial> cursosMaterial;
+	ArrayList<CourseMaterial> cursosMaterial;
 	
 	@Autowired    
 	CursoMaterialRepo cursoMaterialRep; 
