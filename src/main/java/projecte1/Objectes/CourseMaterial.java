@@ -17,6 +17,7 @@ public class CourseMaterial {
 	
 	private String url;
 	
+	
 	@OneToOne
 	private Course course;
 
@@ -33,6 +34,16 @@ public class CourseMaterial {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(url);
