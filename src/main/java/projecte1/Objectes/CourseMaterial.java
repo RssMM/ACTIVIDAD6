@@ -2,11 +2,15 @@ package projecte1.Objectes;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,8 +23,8 @@ public class CourseMaterial {
 	
 	private String url;
 	
+	@ManyToOne(optional = false)
 	@JsonIgnore
-	@ManyToOne
 	private Course course;
 
 	public CourseMaterial() {}
