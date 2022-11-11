@@ -23,7 +23,7 @@ public class CourseMaterial {
 	
 	private String url;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne
 	@JsonIgnore
 	private Course course;
 
@@ -31,6 +31,14 @@ public class CourseMaterial {
 
 	public CourseMaterial(String url) {
 		this.url = url;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getUrl() {

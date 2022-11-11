@@ -23,7 +23,7 @@ public class Course {
 	
 	private String title;
 	
-	@OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
 	private List<CourseMaterial> courseMaterial;
 	
 	public Course() {
@@ -33,7 +33,6 @@ public class Course {
 	public Course(String title) {
 		this.title = title;
 	}
-
 
 	public String getTitle() {
 		return title;
