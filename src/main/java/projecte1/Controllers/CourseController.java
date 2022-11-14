@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import project1.Repositories.CursoMaterialRepo;
 import project1.Repositories.CursosRepo;
 import projecte1.Objectes.Course;
+import projecte1.Objectes.CourseMaterial;
 
 
 
@@ -48,16 +49,11 @@ ArrayList<Course> cursos;
 	}
 	@DeleteMapping("api/cursos/{id}/delete")
     public ResponseEntity<String> deleteCurso(@PathVariable int id) {
-        if (cursoRep.existsById((long) id)) {
-
-        	
+        if (cursoRep.existsById((long) id)) {        	
         	if(!cursoRep.findById((long) id).get().getCourseMaterial().isEmpty()) {
-        		int size = cursoRep.findById((long) id).get().getCourseMaterial().size();
-	        	for(int j = 0; j < size; j++ ) {
-	        		int r = (int) cursoRep.findById((long) id).get().getCourseMaterial().get(j).getId();
-	        		cursoMaterialRep.findAll().get(r).setCourse(null);
-	        	}
-	        	
+        		CourseMaterial cr = cursoRep.findById((long) id).get().getCourseMaterial().get(0);
+        		Course re = cursoRep.findById((long) id).get();
+	        	re.removeCourseMarerial(cr);	
         	}
         	cursoRep.findById((long) id).get().setCourseMaterial(null);
             cursoRep.deleteById((long) id);

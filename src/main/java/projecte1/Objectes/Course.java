@@ -51,6 +51,10 @@ public class Course {
 		this.courseMaterial = courseMaterial;
 	}
 	
+	public void removeCourseMarerial(CourseMaterial material) {
+		courseMaterial.remove(material);
+		material.setCourse(null);
+	}
 	
 	
 }
