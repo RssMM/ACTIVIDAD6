@@ -51,9 +51,13 @@ ArrayList<Course> cursos;
     public ResponseEntity<String> deleteCurso(@PathVariable int id) {
         if (cursoRep.existsById((long) id)) {        	
         	if(!cursoRep.findById((long) id).get().getCourseMaterial().isEmpty()) {
-        		CourseMaterial cr = cursoRep.findById((long) id).get().getCourseMaterial().get(0);
-        		Course re = cursoRep.findById((long) id).get();
-	        	re.removeCourseMarerial(cr);	
+        		int size = cursoRep.findById((long) id).get().getCourseMaterial().size();
+	        	for(int j = 0; j < size; j++ ) {
+	        		CourseMaterial cr = cursoRep.findById((long) id).get().getCourseMaterial().get(0);
+	        		Course re = cursoRep.findById((long) id).get();
+	        		re.removeCourseMarerial(cr);
+	        	}
+	        	
         	}
         	cursoRep.findById((long) id).get().setCourseMaterial(null);
             cursoRep.deleteById((long) id);

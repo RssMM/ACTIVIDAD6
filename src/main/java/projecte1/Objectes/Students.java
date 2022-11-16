@@ -1,11 +1,15 @@
 package projecte1.Objectes;
 
 import java.sql.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,6 +22,13 @@ public class Students {
 	private String firstName;
 	private Date Birth_Date;
 	private boolean wantsNewsLetter;
+	
+	@ManyToMany
+	@JoinTable(
+			  name = "course_students", 
+			  joinColumns = @JoinColumn(name = "ID"), 
+			  inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))		
+	List<Course> cursos;
 	
 	public Students() {}
 
@@ -59,5 +70,15 @@ public class Students {
 	public void setWantsNewsLetter(boolean wantsNewsLetter) {
 		this.wantsNewsLetter = wantsNewsLetter;
 	}
+
+	public List<Course> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Course> cursos) {
+		this.cursos = cursos;
+	}
+	
+	
 	
 }
